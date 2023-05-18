@@ -1,39 +1,32 @@
 
+import React, { useEffect } from 'react'
+import Home from '../components/Home'
+import { useMovie } from '../providers/movie'
+import Layout from './Movie/Layout'
+import Movie from './../pages/Movie'
+import Login from './Login'
 
+function index() {
+  const {fetchMovies, FetchedMovies} = useMovie()
 
-import React from "react";
-import { RestfulProvider } from "restful-react";
+  useEffect(() => {
+    fetchMovies()
+  
+  }, [])
 
-import App from "./App";
+  if (!FetchedMovies) {
+    return <div>Loading.............</div>
+  }
 
-const MyRestfulApp = () => (
-  <RestfulProvider base="https://localhost:44311/api/services/app/">
-    <App />
-  </RestfulProvider>
-);
+  
+  return (
+    <div>
+        {/* <Login/> */}
+          <Home/>
+        {/* <Movie/> */}
+     
+    </div>
+  )
+}
 
-export default MyRestfulApp;
-
-
-
-
-
-
-
-
-
-
-
-// import Link from 'next/link'
-// import Layout from '../components/Layout'
-
-// const IndexPage = () => (
-//   <Layout title="Home | Next.js + TypeScript Example">
-//     <h1>Hello Next.js 👋</h1>
-//     <p>
-//       <Link href="/about">About</Link>
-//     </p>
-//   </Layout>
-// )
-
-// export default IndexPage
+export default index;
