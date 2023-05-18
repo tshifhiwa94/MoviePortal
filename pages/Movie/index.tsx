@@ -1,20 +1,19 @@
 import React from 'react'
-import Playlist from './Playlist'
-import NavBar from './NavBar'
-import Footer from './Footer'
-import VideoPlayer from './VideoPlayer'
-import LayoutMain from './Layout'
+import Movies from '../../components/Movie/Movies'
+import VideoPlayer from '../../components/Movie/Videoplayer'
+import Layout from '../../components/Layout'
+
+
 
 const index = () => {
   return (
     <div>
-      <LayoutMain>
-        <NavBar/>
-        <VideoPlayer/>
-        <Playlist/>
-        <Footer/>
-      </LayoutMain>
-       
+      <Layout >
+        {/* <VideoPlayer videoUrl={"videoUrl"} /> */}
+        {/* {<br/>} */}
+        <Movies />
+      </Layout>
+
     </div>
   )
 }

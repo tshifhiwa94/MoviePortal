@@ -55,14 +55,7 @@ function Login() {
             <Button type="primary" htmlType="submit" className="login-form-button" style={{ marginRight: 10}}>
               Login
             </Button>
-          </Form.Item>
- 
-            <p className='para'>New to ZMovies? &nbsp;
-                <a href="#" onClick={() => setRegisterMode(true)} className='aLogin'>
-              Register now!
-            </a>
-            </p>
-            
+          </Form.Item>  
           </span>
         </Form>
        

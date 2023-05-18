@@ -1,0 +1,26 @@
+.movieLayout {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .movieHeader {
+    background-color: #f0f2f5;
+    padding: 0;
+  }
+  
+  .movieSider {
+    background-color: #f0f2f5;
+    padding: 24px;
+  }
+  
+  .movieContent {
+    background-color: #fff;
+    padding: 24px;
+  }
+  
+  .movieFooter {
+    background-color: #f0f2f5;
+    padding: 24px;
+    text-align: center;
+  }
+  

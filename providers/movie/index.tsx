@@ -25,9 +25,6 @@ export const MovieProvider = ({ children }) => {
 
   const fetchMovies = () => {
 
-    
-    console.log("wwwwwwwwwwwww",movieData.result)
-
     dispatch(fetchMoviesRequestAction(movieData.result));
   };
 

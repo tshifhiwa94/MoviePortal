@@ -6,6 +6,8 @@ export interface IMovie {
   starring: string;
   duration: string;
   categoryName: string;
+  pictureUrl: string,
+  videoUrl: string
 }
 
 export interface IMovieStateContext {

@@ -2,9 +2,11 @@
 import React, { useEffect } from 'react'
 import Home from '../components/Home'
 import { useMovie } from '../providers/movie'
-import Layout from './Movie/Layout'
-import Movie from './../pages/Movie'
+import Movie from './Movie'
+import NavBar from '../components/NavBar'
+import Register from './Register'
 import Login from './Login'
+
 
 function index() {
   const {fetchMovies, FetchedMovies} = useMovie()
@@ -22,9 +24,11 @@ function index() {
   return (
     <div>
         {/* <Login/> */}
-          <Home/>
-        {/* <Movie/> */}
-     
+         
+          {/* <NavBar/> */}
+          <Movie/>
+
+          {/* <Register/> */}
     </div>
   )
 }

@@ -18,15 +18,39 @@ const UserProvider:FC<PropsWithChildren<any>> =({children})=>{
         path: "TokenAuth/Authenticate",
         verb: "POST",
       });
-    
-    
-      const createUser=async(payload:IUser)=>{
 
-      }
+      const { mutate: signUp } = useMutate({
+        path: "services/app/Person/Create",
+        verb: "POST",
+      });
+
+
+
+
+const createUser = async (payload: IUser) => 
+{
+  try {
+  
+    const response = await signUp(payload);
+    console.log("New User",response.data);
+
+    // Dispatch an action to handle the successful user creation
+    dispatch(createUserRequestAction(response.data));
+
+   
+    // router.push("/dashboard");
+  } finally
+  {
+    console.log("Thank you")
+  }
+};
+
+
+
       
     
 
-      const loginUser = (loginPerson) => {
+      const loginUser = (loginPerson:ILogin) => {
        
          
       };

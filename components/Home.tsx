@@ -2,7 +2,11 @@ import React from 'react';
 import { LogoutOutlined, SearchOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined,LaptopOutlined ,NotificationOutlined} from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Button, Input, Layout, Menu, theme } from 'antd';
-import Movies from './MovieTable';
+import Movies from './Movie/Movies';
+
+
+
+
 const { Header, Content, Sider } = Layout;
 
 const items1: MenuProps['items'] = ['1'].map((key) => ({

@@ -7,6 +7,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
     "@types/redux-actions": "^2.6.2",
@@ -16,6 +17,7 @@
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-player": "^2.12.0",
     "react-router-dom": "^6.11.2",
     "redux-actions": "^3.0.0",
     "restful-react": "^15.9.4"
