@@ -1,7 +1,7 @@
 import {createAction} from 'redux-actions';
 import { IUserStateContext } from './context';
-import { IUser } from './context';
-import { ILogin } from './context';
+import { ILogin, IUser } from '../../interfaces';
+
 
 
 export enum UserActionEnum{

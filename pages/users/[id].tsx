@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+// import { GetStaticProps, GetStaticPaths } from 'next'
 
 // import { User } from '../../interfaces'
 // import { sampleUserData } from '../../utils/sample-data'

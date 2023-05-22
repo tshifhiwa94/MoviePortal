@@ -1,21 +1,18 @@
-import React from 'react'
-import Movies from '../../components/Movie/Movies'
-import VideoPlayer from '../../components/Movie/Videoplayer'
-import Layout from '../../components/Layout'
+import React from 'react';
+import Layout from '../../components/Layout';
+import AllMovies from '../../components/Movie/AllMovie/AllMovies';
 
 
-
-const index = () => {
+const Index = () => {
   return (
     <div>
       <Layout >
-        {/* <VideoPlayer videoUrl={"videoUrl"} /> */}
-        {/* {<br/>} */}
-        <Movies />
+      <AllMovies />
       </Layout>
-
+        
+       
     </div>
-  )
-}
+  );
+};
 
-export default index
+export default Index;

@@ -1,82 +1,112 @@
+import React, { useState } from 'react';
+import { Breadcrumb, Input, Button, Empty, Modal } from 'antd';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import styles from './Layout.module.css';
+import MovieFooter from '../MovieFooter';
+import { useMovie } from '../../providers/movie';
+import MovieList from '../Movie/MovieList/MovieList';
+import { PoweroffOutlined } from '@ant-design/icons';
+import { useUser } from '../../providers/user';
 
+const Layout = ({ children }) => {
+  const { FetchedMovies } = useMovie();
+  const { logOutUser } = useUser();
+  const router = useRouter();
+  const pathSnippets = router.asPath.split('/').filter((i) => i);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
-// import React, { FC, ReactNode } from 'react';
-// import { Layout, Space } from 'antd';
-// import styles from './Layout.module.css'
-// import NavBar from '../NavBar';
-// import MovieFooter from '../MovieFooter';
+  const breadcrumbNameMap = {
+    '/': 'Home',
+    '/Movie': 'Movies',
+    '/MostRatedMovies': 'Most Rated',
+    '/MostViewedMovies': 'Most Viewed',
+  };
 
-// const { Header, Footer, Sider, Content } = Layout;
+  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    const title = breadcrumbNameMap[url];
+    return (
+      <Breadcrumb.Item key={url}>
+        <Link href={url}>{title}</Link>
+      </Breadcrumb.Item>
+    );
+  });
 
-// type Props = {
-//   children?: ReactNode;
-//   title?: string;
-// };
+  const breadcrumbItems = [
+    <Breadcrumb.Item key="home">
+      <Link href="/">Home</Link>
+    </Breadcrumb.Item>,
+  ].concat(extraBreadcrumbItems);
 
-// const Index: FC<Props> = ({ children, title = 'Movie Portal' }: Props) => (
-//   <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
-//     <Layout className={styles.movieLayout}>
-//       <Header className={styles.movieHeader}>
-        
-//       </Header>
-//       <Layout>
-//         <Sider className={styles.movieSider}><NavBar/></Sider>
-//         <Content className={styles.movieContent}>{children}</Content>
-//       </Layout>
-//       <Footer className={styles.movieFooter}>
-//             <MovieFooter/>
-//       </Footer>
-//     </Layout>
-//   </Space>
-// );
+  const handleSearch = () => {
+    console.log(`Performing search for query: ${searchQuery}`);
 
-// export default Index;
+    // Filter movies based on the search query
+    const filteredMovies = FetchedMovies.filter(movie =>
+      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
+    if (filteredMovies.length > 0) {
+      console.log('Search results:', filteredMovies);
+      setFilteredMovies(filteredMovies); // Update the filtered movies state
+    } else {
+      setFilteredMovies([]);
+      return <Empty description="No movies found." />;
+    }
+  };
 
-import React from 'react';
-import { Layout, Menu,Button } from 'antd';
-import { UserOutlined, VideoCameraOutlined, LogoutOutlined } from '@ant-design/icons';
+  const handleLogout = () => {
+    Modal.confirm({
+      title: 'Logout',
+      content: 'Are you sure you want to log out?',
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: logOutUser,
+    });
+  };
 
-const { Header, Sider, Content } = Layout;
-
-const MainLayout = ({ children }) => {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider width={200} theme="dark">
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['']}>
-          <Menu.Item key="1" icon={<UserOutlined />} title="Most Viewed Movies">
-            Most Viewed
-          </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />} title="Most Rated Movies">
-            Most Rated
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ marginRight: 20 }}><h1>ZMovies</h1></span>
-          <div>
-             
-            <span style={{ marginLeft: 300 }}>Global Search</span>
-            <span style={{ marginLeft: 200 }}><Button>Wishlist</Button></span>
-          </div>
-        
-            
-            <span style={{ marginRight: 20 }}>
-              
-              <Button><LogoutOutlined /></Button>
+    <div className={styles.layoutContainer}>
+      <div className={styles.demoNav}>
+        <Button>
+          <Link href="/HomePage">Home</Link>
+        </Button>
+        <Button>
+          <Link href="/Movie">All Movies</Link>
+        </Button>
+        <Button>
+          <Link href="/MostRatedMovies">Most Rated Movies</Link>
+        </Button>
+        <Button>
+          <Link href="/MostViewedMovies">Most Viewed Movies</Link>
+        </Button>
 
-            </span>
-          </div>
-        </Header>
-        <Content style={{ margin: '24px 16px 0' }}>{children}</Content>
-      </Layout>
-    </Layout>
+        <Input.Search
+          className={styles.globalSearch}
+          placeholder="Search Movies"
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          onSearch={handleSearch}
+        />
+        <Button className={styles.logoutBtn} type="primary" onClick={handleLogout}>
+          <PoweroffOutlined />
+        </Button>
+      </div>
+      <div className={styles.content}>
+        <Breadcrumb className={styles.breadcrumbWrapper}>{breadcrumbItems}</Breadcrumb>
+        {/* Render the content based on the route */}
+        {router.pathname === '/HomePage' && children}
+        {router.pathname === '/Movie' && (
+          <MovieList movies={filteredMovies.length > 0 ? filteredMovies : FetchedMovies} />
+        )}
+        {router.pathname === '/MostRatedMovies' && children}
+        {router.pathname === '/MostViewedMovies' && children}
+      </div>
+      <MovieFooter />
+    </div>
   );
 };
 
-export default MainLayout;
-
-
-
+export default Layout;

@@ -1,0 +1,30 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .goBackButton {
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .videoContainer {
+    display: flex;
+    justify-content: center;
+  }
+  

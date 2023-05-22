@@ -28,3 +28,16 @@
   }
 
   
+.videoPlayerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 60vh; 
+}
+
+.reactPlayer {
+  width: 80%;
+  height: 100%;
+}
+  

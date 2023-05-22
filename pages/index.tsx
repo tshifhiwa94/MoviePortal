@@ -1,11 +1,10 @@
 
 import React, { useEffect } from 'react'
-import Home from '../components/Home'
 import { useMovie } from '../providers/movie'
-import Movie from './Movie'
-import NavBar from '../components/NavBar'
-import Register from './Register'
-import Login from './Login'
+import Movie from './MoviePage.module.css'
+import Layout from '../components/Layout'
+import HomePage from '../components/HomePage'
+import AuthPage from './Auth'
 
 
 function index() {
@@ -23,12 +22,12 @@ function index() {
   
   return (
     <div>
-        {/* <Login/> */}
-         
-          {/* <NavBar/> */}
-          <Movie/>
+      <AuthPage/>
 
-          {/* <Register/> */}
+        {/* <Layout>
+              <HomePage/>
+        </Layout> */}
+         
     </div>
   )
 }

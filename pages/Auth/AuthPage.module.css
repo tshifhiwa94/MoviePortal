@@ -1,0 +1,38 @@
+/* AuthPage.module.css */
+.authPage {
+    margin-top: 100px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    width: 100%;
+  }
+  
+  .siteFormItemIcon {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  
+  .switchText {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .submitButton {
+    width: 100%;
+  }
+  
+  .inputLogin {
+    margin-bottom: 20px;
+  }
+  
+  /* Add any additional styles you need */
+  

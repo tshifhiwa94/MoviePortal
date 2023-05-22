@@ -1,11 +1,6 @@
-import React, { useReducer, useContext } from "react";
-import {
-  MoviesStateContext,
-  MoviesActionContext,
-  INITIAL_STATE,
-  IMovie,
-} from "./context";
-import { fetchMoviesRequestAction } from "./action";
+import React, { useReducer, useContext ,useEffect} from "react";
+import {MoviesStateContext,MoviesActionContext, INITIAL_STATE} from "./context";
+import { fetchMoviesRequestAction,fetchMovieByIdRequestAction } from "./action";
 import { UserReducer } from "./reducer";
 import { useGet } from "restful-react";
 
@@ -21,17 +16,36 @@ export const MovieProvider = ({ children }) => {
     
   }
 
-  // console.log("mphe", movieData.result);
+//   const { data: movie } = useGet( { path: 'services/app/Movie/GetAsnyc' } );
+
+//  if(!movie)
+//  {
+//    console.log(movie)
+//  }
+
+
+
+
+
+  const getMovie = (movieId: string) => {
+    // fetchMovieByIdRequestAction( movieId);
+  };
+
+
+  
+console.log(movieData.result);
 
   const fetchMovies = () => {
 
     dispatch(fetchMoviesRequestAction(movieData.result));
   };
 
+
+
   return (
     <>
       <MoviesStateContext.Provider value={state}>
-        <MoviesActionContext.Provider value={{ fetchMovies }}>
+        <MoviesActionContext.Provider value={{ fetchMovies,getMovie}}>
           {children}
         </MoviesActionContext.Provider>
       </MoviesStateContext.Provider>
