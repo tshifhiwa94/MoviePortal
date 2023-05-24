@@ -12,7 +12,7 @@ export const INITIAL_STATE: IMovieStateContext = {};
 
 export interface IMovieActionsContext {
   fetchMovies: () => void;
-  getMovie: (payload:string) => void;
+  mostRatedMovies:(payload:string)=>void;
 }
 
 export const MoviesStateContext = createContext<IMovieStateContext>(INITIAL_STATE);

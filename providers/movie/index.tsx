@@ -1,6 +1,6 @@
 import React, { useReducer, useContext ,useEffect} from "react";
 import {MoviesStateContext,MoviesActionContext, INITIAL_STATE} from "./context";
-import { fetchMoviesRequestAction,fetchMovieByIdRequestAction } from "./action";
+import { fetchMoviesRequestAction} from "./action";
 import { UserReducer } from "./reducer";
 import { useGet } from "restful-react";
 
@@ -9,30 +9,13 @@ export const MovieProvider = ({ children }) => {
 
 
   const { data: movieData } = useGet({
-    path: "services/app/Movie/GetAllAsnyc",
+    path: "services/app/Movie/GetAll",
   });
   if (!movieData) {
     return <div>Loading...</div>;
     
   }
-
-//   const { data: movie } = useGet( { path: 'services/app/Movie/GetAsnyc' } );
-
-//  if(!movie)
-//  {
-//    console.log(movie)
-//  }
-
-
-
-
-
-  const getMovie = (movieId: string) => {
-    // fetchMovieByIdRequestAction( movieId);
-  };
-
-
-  
+ 
 console.log(movieData.result);
 
   const fetchMovies = () => {
@@ -40,12 +23,16 @@ console.log(movieData.result);
     dispatch(fetchMoviesRequestAction(movieData.result));
   };
 
+  const  mostRatedMovies = (payload:string)=>{
+
+  }
+
 
 
   return (
     <>
       <MoviesStateContext.Provider value={state}>
-        <MoviesActionContext.Provider value={{ fetchMovies,getMovie}}>
+        <MoviesActionContext.Provider value={{ fetchMovies, mostRatedMovies}}>
           {children}
         </MoviesActionContext.Provider>
       </MoviesStateContext.Provider>

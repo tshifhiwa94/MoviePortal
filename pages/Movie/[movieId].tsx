@@ -4,7 +4,9 @@ import { useMovie } from "../../providers/movie";
 import VideoPlayer from "../../components/Movie/AllMovie/Videoplayer";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import styles from "./MoviePage.module.css";
+import styles from "./MoviePage.module.css"
+import MovieSuggestions from "../../components/movieSuggestions/movieSuggestions - Copy/MovieSuggestions";
+import { IMovie } from "../../interfaces";
 
 const MoviePage: FC = () => {
   const { FetchedMovies } = useMovie();
@@ -12,9 +14,18 @@ const MoviePage: FC = () => {
   const { movieId } = router.query;
   const selectedMovie = FetchedMovies.find((movie) => movie.id === movieId);
 
-  const handleGoBack = () => {
-    router.back();
-  };
+
+
+  var foundMovie: IMovie;
+  var foundCategory: IMovie[];
+
+  if (FetchedMovies) {
+    foundMovie = FetchedMovies.find((movie) => movie.id.toString() === movieId);
+    foundCategory = FetchedMovies.filter(
+      (movie) =>
+        movie?.categoryName.toLowerCase() === foundMovie?.categoryName.toLowerCase() &&
+        movie?.id.toString() !== movieId
+    );
 
   return (
     <div className={styles.container}>
@@ -29,28 +40,12 @@ const MoviePage: FC = () => {
       <div className={styles.videoContainer}>
         {selectedMovie && <VideoPlayer videoUrl={selectedMovie.videoUrl} />}
       </div>
+      <div className={styles.suggestionsContainer}>
+        <MovieSuggestions movies={foundCategory} />
+      </div>
     </div>
+
   );
 };
-
+}
 export default MoviePage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

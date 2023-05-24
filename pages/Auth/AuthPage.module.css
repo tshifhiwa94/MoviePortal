@@ -1,38 +1,47 @@
-/* AuthPage.module.css */
 .authPage {
-    margin-top: 100px;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form {
-    width: 100%;
-  }
-  
-  .siteFormItemIcon {
-    color: rgba(0, 0, 0, 0.25);
-  }
-  
-  .switchText {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .submitButton {
-    width: 100%;
-  }
-  
-  .inputLogin {
-    margin-bottom: 20px;
-  }
-  
-  /* Add any additional styles you need */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg");
+}
+
+
+.title {
+  font-size: 34px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form {
+  width: 400px;
+  border-radius: 2%;
+background-color: rgba(87, 89, 90, 0.726);
+  border: 1px solid rgb(168, 162, 162);
+}
+
+.siteFormItemIcon {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.submitButton {
+  width: 100%;
+ 
+}
+
+.switchText {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.inputLogin {
+  margin: 16px 2px;
+}
+
+
+
+
+
   

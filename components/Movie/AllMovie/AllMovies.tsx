@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useMovie } from "../../../providers/movie";
-// import GlobalSearch from "../GlobalSearch/GlobalSearch";
 import MovieList from "../MovieList/MovieList";
 
 const AllMovies = () => {
-  const { FetchedMovies } = useMovie();
+  const { FetchedMovies, fetchMovies } = useMovie();
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetchMovies(); // Fetch movies when the component mounts
+  }, []);
 
   const filterMovies = (movies) => {
-    if (searchText === "") 
-    {
+    if (searchText === "") {
       return movies;
     }
 
@@ -25,9 +27,8 @@ const AllMovies = () => {
   return (
     <div>
       <div style={{ position: "sticky", top: 0, zIndex: 1 }}>
-        {/* <GlobalSearch onSearch={handleSearch} /> */}
       </div>
-      { !FetchedMovies? (
+      {loading ? (
         <Spin size="large" />
       ) : (
         <MovieList movies={filteredMovies} />

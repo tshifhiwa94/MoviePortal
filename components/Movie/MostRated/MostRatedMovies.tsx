@@ -8,15 +8,14 @@ const MostRatedMovies = ({ movies }) => {
   useEffect(() => {
     // Function to calculate most rated movies
     const calculateMostRatedMovies = () => {
-     
       const sortedMovies = movies.sort((a, b) => b.rating - a.rating);
 
       // Get the top 10 most rated movies
       const topRatedMovies = sortedMovies.slice(0, 10);
- 
+
       const moviesWithRatingSum = topRatedMovies.map((movie) => ({
         ...movie,
-        ratingSum: movie.ratings.reduce((acc, cur) => acc + cur.ratingValue, 0),
+        ratingSum: movie.rating.reduce((acc, cur) => acc + cur.ratingValue, 0),
       }));
 
       setMostRatedMovies(moviesWithRatingSum);
@@ -32,10 +31,13 @@ const MostRatedMovies = ({ movies }) => {
         <ul className={styles.list}>
           {mostRatedMovies.map((movie) => (
             <li key={movie.id} className={styles.movie}>
-              <span className={styles.movieTitle}>{<img src={movie.pictureUrl} />}</span>
-              <span className={styles.movieRating}>
-                Rating: {movie.starring} | Rating Sum: {movie.ratingSum}
-              </span>
+              <img src={movie.pictureUrl} alt={movie.title} className={styles.movieImage} />
+              <div className={styles.movieInfo}>
+                <span className={styles.movieTitle}>{movie.title}</span>
+                <span className={styles.movieRating}>
+                  Rating: {movie.rating} | Rating Sum: {movie.ratingSum}
+                </span>
+              </div>
             </li>
           ))}
         </ul>

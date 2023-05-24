@@ -28,7 +28,7 @@ const AuthPage = () => {
     <div className={styles.authPage}>
       {isRegisterForm ? (
         <>
-          <h1 className={styles.title}>REGISTER</h1>
+          <h1 className={styles.titleRegister}>REGISTER</h1>
           <Form name="register-form" className={styles.form} onFinish={onFinishRegister}>
           <Form.Item name="username" rules={[{ required: true, message: 'Please input your Username!' }]}>
             <Input prefix={<UserOutlined className={styles.siteFormItemIcon} />} placeholder="Username" />
@@ -77,8 +77,9 @@ const AuthPage = () => {
         </>
       ) : (
         <>
-          <h1 className={styles.title}>LOGIN</h1>
-          <Form name="login-form" className={styles.form} onFinish={onFinishLogin}>
+        <h1 className={styles.title} id="LoginTitle">WELCOME TO ZMOVIES</h1>
+         
+          <Form name="login-form" className={styles.form} onFinish={onFinishLogin} id="loginform">
           <Form.Item
           name="userNameOrEmailAddress"
           rules={[{ required: true, message: 'Please input your username!' }]}

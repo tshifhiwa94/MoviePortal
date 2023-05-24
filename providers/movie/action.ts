@@ -4,10 +4,11 @@ import { IMovie } from '../../interfaces';
 
 export enum movieActionEnum {
   fetchMoviesRequest = 'GETALL',
-  fetchMovieByIdRequest = 'GETMOVIEBYID',
+  mostRatedMovies= "MOSTRATED"
 }
 
 export const fetchMoviesRequestAction = createAction<IMovieStateContext, IMovie[]>(movieActionEnum.fetchMoviesRequest,(FetchedMovies) => ({ FetchedMovies }));
-export const fetchMovieByIdRequestAction = createAction<IMovieStateContext, string>(movieActionEnum.fetchMovieByIdRequest,(MovieId) => ({ MovieId }));
+export const mostMovieRequestAction = createAction<IMovieStateContext, IMovie[]>(movieActionEnum.mostRatedMovies,(FetchedMovies) => ({ FetchedMovies}));
+
 
 

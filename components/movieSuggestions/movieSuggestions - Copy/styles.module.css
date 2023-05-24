@@ -1,0 +1,35 @@
+.movieSuggestions {
+  margin-top: 40px;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px; /* Reduce the grid-gap */
+}
+
+.movieCard {
+  cursor: pointer;
+  width: 350px;
+}
+
+.movieCardCover {
+  object-fit: cover;
+  height: 200px;
+}
+
+.movieCardContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movieCardTitle {
+  margin-bottom: 0;
+}
+
+.movieCardContent p {
+  margin-bottom: 8px;
+  margin-left: 10px;
+}

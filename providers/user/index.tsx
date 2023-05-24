@@ -30,15 +30,12 @@ const UserProvider:FC<PropsWithChildren<any>> =({children})=>{
       
      
         const loginUser = async (payload:ILogin) => {
-            console.log("data", payload)
+
           try {
-            console.log("data")
+ 
 
             const response = await loginUserHttp(payload);
-            console.log("response::",response)
-
-            // const { data } = response;
-            console.log("data",response)
+          
             if (response.success && response.result.accessToken) {
               localStorage.setItem("token", response.result.accessToken);
               dispatch(loginUserRequestAction(response));
@@ -47,9 +44,9 @@ const UserProvider:FC<PropsWithChildren<any>> =({children})=>{
                 description: "Login successful",
                 
               });
-              push('/Movie');
+              push('/HomePage');
             } else {
-              // Handle incorrect email/password case
+           
               notification.error({
                 message: "Error",
                 description: "Invalid username or password",
@@ -80,7 +77,7 @@ const UserProvider:FC<PropsWithChildren<any>> =({children})=>{
                     message: "Success",
                     description: "New person was registrated successfully",
                   });
-                push("/Login")
+                push("/Auth")
               } else {
                 // Handle error case
                 notification.error({
@@ -99,7 +96,12 @@ const UserProvider:FC<PropsWithChildren<any>> =({children})=>{
           const logOutUser = () => {
        
             localStorage.removeItem('token');
-           push('/Login');
+           push('/Auth');
+           notification.success({
+            message: "Success",
+            description: "Logout successful",
+            
+          });
           };
           
 

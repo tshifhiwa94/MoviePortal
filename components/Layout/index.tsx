@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Breadcrumb, Input, Button, Empty, Modal } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Breadcrumb, Input, Button, Empty, Modal, Badge } from 'antd';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './Layout.module.css';
-import MovieFooter from '../MovieFooter';
 import { useMovie } from '../../providers/movie';
 import MovieList from '../Movie/MovieList/MovieList';
-import { PoweroffOutlined } from '@ant-design/icons';
+import { PoweroffOutlined, ClockCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useUser } from '../../providers/user';
+
 
 const Layout = ({ children }) => {
   const { FetchedMovies } = useMovie();
@@ -16,12 +16,20 @@ const Layout = ({ children }) => {
   const pathSnippets = router.asPath.split('/').filter((i) => i);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
+
+  useEffect(() => {
+    const savedWatchlist = localStorage.getItem('watchlist');
+    if (savedWatchlist) {
+      setWatchlist(JSON.parse(savedWatchlist));
+    }
+  }, []);
 
   const breadcrumbNameMap = {
     '/': 'Home',
     '/Movie': 'Movies',
     '/MostRatedMovies': 'Most Rated',
-    '/MostViewedMovies': 'Most Viewed',
+    '/WatchList': 'Watch List',
   };
 
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
@@ -43,17 +51,16 @@ const Layout = ({ children }) => {
   const handleSearch = () => {
     console.log(`Performing search for query: ${searchQuery}`);
 
-    // Filter movies based on the search query
-    const filteredMovies = FetchedMovies.filter(movie =>
+
+    const filteredMovies = FetchedMovies.filter((movie) =>
       movie.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     if (filteredMovies.length > 0) {
-      console.log('Search results:', filteredMovies);
       setFilteredMovies(filteredMovies); // Update the filtered movies state
     } else {
       setFilteredMovies([]);
-      return <Empty description="No movies found." />;
+      
     }
   };
 
@@ -67,44 +74,53 @@ const Layout = ({ children }) => {
     });
   };
 
+
   return (
     <div className={styles.layoutContainer}>
       <div className={styles.demoNav}>
-        <Button>
-          <Link href="/HomePage">Home</Link>
-        </Button>
-        <Button>
-          <Link href="/Movie">All Movies</Link>
-        </Button>
-        <Button>
-          <Link href="/MostRatedMovies">Most Rated Movies</Link>
-        </Button>
-        <Button>
-          <Link href="/MostViewedMovies">Most Viewed Movies</Link>
-        </Button>
+      <Button className={router.pathname === '/HomePage' ? styles.activeButton : ''}>
+        <Link href="/HomePage">ZMovies</Link>
+      </Button>
+      <Button className={router.pathname === '/Movie' ? styles.activeButton : ''}>
+        <Link href="/Movie">All Movies</Link>
+      </Button>
+      <Button className={router.pathname === '/MostRatedMovies' ? styles.activeButton : ''}>
+        <Link href="/MostRatedMovies">Most Rated Movies</Link>
+      </Button>
+      <Button className={router.pathname === '/WatchList' ? styles.activeButton : ''}>
+        <Link href="/WatchList">Watch List</Link>
+      </Button>
 
         <Input.Search
           className={styles.globalSearch}
           placeholder="Search Movies"
           value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
           onSearch={handleSearch}
         />
-        <Button className={styles.logoutBtn} type="primary" onClick={handleLogout}>
-          <PoweroffOutlined />
+        <Button className={styles.logoutBtn} type="primary" onClick={(handleLogout)}>
+        <LogoutOutlined />
         </Button>
       </div>
       <div className={styles.content}>
-        <Breadcrumb className={styles.breadcrumbWrapper}>{breadcrumbItems}</Breadcrumb>
+        <Breadcrumb className={styles.breadcrumbWrapper}>
+          {breadcrumbItems}
+          {router.pathname === '/WatchList' && (
+            <Badge count={watchlist.length}>
+              <ClockCircleOutlined style={{ marginLeft: '8px', fontSize: '16px' }} />
+            </Badge>
+          )}
+        </Breadcrumb>
         {/* Render the content based on the route */}
         {router.pathname === '/HomePage' && children}
         {router.pathname === '/Movie' && (
           <MovieList movies={filteredMovies.length > 0 ? filteredMovies : FetchedMovies} />
         )}
         {router.pathname === '/MostRatedMovies' && children}
-        {router.pathname === '/MostViewedMovies' && children}
+
+        {router.pathname === '/WatchList' && children}
       </div>
-      <MovieFooter />
+    
     </div>
   );
 };

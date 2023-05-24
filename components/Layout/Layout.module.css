@@ -1,10 +1,13 @@
 /* Layout.module.css */
 .layoutContainer {
   padding: 20px;
-  background-color: #f5f5f5;
+  /* background-color: #b9b3afb7; */
+  background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg");
+  background-size:cover;
   display: flex;
   flex-direction: column;
   min-height: 94vh;
+
 }
 
 .demoNav {
@@ -27,14 +30,18 @@
   padding: 24px;
   width: 80%;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #8f7f7f79;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.activeButton {
+  background-color: #f0f0f0; /* Change to the desired color for the active button */
+  color: #1890ff; /* Change to the desired text color for the active button */
+}
 .breadcrumbWrapper {
   margin-bottom: 16px;
+  color: black;
 }
 
 .logoutBtn {

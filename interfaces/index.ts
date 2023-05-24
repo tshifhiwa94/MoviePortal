@@ -5,8 +5,9 @@
 // import { User } from 'path/to/interfaces';
 
 export type User = {
-  id: number
-  name: string
+  MovieId: string,
+  personId: string,
+  ratingValue:number
 }
 export interface IMovie {
   id?: string;
@@ -16,6 +17,7 @@ export interface IMovie {
   categoryName: string;
   pictureUrl: string,
   videoUrl: string
+  
 }
 
 export interface IUser{

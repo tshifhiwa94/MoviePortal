@@ -1,17 +1,62 @@
-// import React, { useState } from "react";
-// import { Empty, Card, Carousel, Pagination } from "antd";
+// import React, { useState, useEffect } from "react";
+// import { Empty, Card, Pagination, Rate, Button, notification } from "antd";
 // import Link from "next/link";
 // import styles from "./MovieList.module.css";
+// import { IMovie } from "../../../interfaces";
 
 // const { Meta } = Card;
 
 // const MovieList = ({ movies }) => {
 //   const [currentPage, setCurrentPage] = useState(1);
-//   const moviesPerPage = 5;
+//   const [watchlist, setWatchlist] = useState([]);
 
+//   const moviesPerPage = 5;
 //   const indexOfLastMovie = currentPage * moviesPerPage;
 //   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
 //   const currentMovies = movies?.slice(indexOfFirstMovie, indexOfLastMovie);
+
+//   const handleRateMovie = (movieId, rating) => {
+//     console.log(`Rating for movie ${movieId}: ${rating}`);
+//   };
+
+//   const handleAddToWatchlist = (movie) => {
+//     if (!watchlist.includes(movie)) {
+//       setWatchlist((prevWatchlist) => {
+//         const newWatchlist = [...prevWatchlist, movie];
+//         localStorage.setItem("watchlist", JSON.stringify(newWatchlist)); // Save updated watchlist to local storage
+//         return newWatchlist;
+//       });
+
+//       notification.success({
+//         message: "Success",
+//         description: `Added movie ${movie.title} to watchlist.`,
+//       });
+//     }
+//   };
+
+//   const handleRemoveFromWatchlist = (movie) => {
+//     setWatchlist((prevWatchlist) => {
+//       const newWatchlist = prevWatchlist.filter((item) => item !== movie);
+//       localStorage.setItem("watchlist", JSON.stringify(newWatchlist)); // Save updated watchlist to local storage
+//       return newWatchlist;
+//     });
+
+//     notification.success({
+//       message: "Success",
+//       description: `Removed movie ${movie.title} from watchlist.`,
+//     });
+//   };
+
+//   const isAddedToWatchlist = (movie) => {
+//     return watchlist.includes(movie);
+//   };
+
+//   useEffect(() => {
+//     const savedWatchlist = localStorage.getItem("watchlist");
+//     if (savedWatchlist) {
+//       setWatchlist(JSON.parse(savedWatchlist)); // Load watchlist from local storage
+//     }
+//   }, []);
 
 //   const renderMovies = () => {
 //     if (!Array.isArray(movies) || movies.length === 0) {
@@ -21,17 +66,33 @@
 //     return (
 //       <div className={styles.row}>
 //         {currentMovies.map((movie) => (
-//           <Link key={movie.id} href={`/Movie/${movie.id}`} passHref>
+//           <div key={movie.id}>
 //             <div className={styles.card}>
-//               <Card
-//                 hoverable
-//                 style={{ height: "100%" }}
-//                 cover={<img src={movie.pictureUrl} alt={movie.title} style={{ height: "300px" }} />}
-//               >
-//                 <Meta title={movie.title} description={movie.starring} />
-//               </Card>
+//               <Link href={`/Movie/${movie.id}`} passHref>
+//                 <Card
+//                   hoverable
+//                   style={{ height: "100%" }}
+//                   cover={<img src={movie.pictureUrl} alt={movie.title} style={{ height: "220px" }} />}
+//                 >
+//                   <Meta title={movie.title} description={movie.starring} />
+//                 </Card>
+//               </Link>
+//               <Rate allowHalf defaultValue={0} onChange={(rating) => handleRateMovie(movie, rating)} />
+//               {isAddedToWatchlist(movie) ? (
+//                 <Button type="primary" onClick={() => handleRemoveFromWatchlist(movie)}>
+//                   Added to WatchList
+//                 </Button>
+//               ) : (
+//                 <Button
+//                   type="primary"
+//                   onClick={() => handleAddToWatchlist(movie)}
+//                   disabled={isAddedToWatchlist(movie)}
+//                 >
+//                   Add to WatchList
+//                 </Button>
+//               )}
 //             </div>
-//           </Link>
+//           </div>
 //         ))}
 //       </div>
 //     );
@@ -58,53 +119,102 @@
 // export default MovieList;
 
 
-
-
-import React, { useState } from "react";
-import { Empty, Card, Pagination, Rate } from "antd";
+import React, { useState, useEffect } from "react";
+import { Empty, Card, Pagination, Rate, Button, notification } from "antd";
 import Link from "next/link";
 import styles from "./MovieList.module.css";
+import { IMovie } from "../../../interfaces";
 
 const { Meta } = Card;
 
 const MovieList = ({ movies }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 5;
+  const [watchlist, setWatchlist] = useState([]);
 
+  const moviesPerPage = 5;
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
   const currentMovies = movies?.slice(indexOfFirstMovie, indexOfLastMovie);
+
+  const handleRateMovie = (movieId, rating) => {
+    console.log(`Rating for movie ${movieId}: ${rating}`);
+  };
+
+  const handleAddToWatchlist = (movie) => {
+    if (!watchlist.includes(movie)) {
+      setWatchlist((prevWatchlist) => {
+        const newWatchlist = [...prevWatchlist, movie];
+        localStorage.setItem("watchlist", JSON.stringify(newWatchlist)); // Save updated watchlist to local storage
+        return newWatchlist;
+      });
+
+      notification.success({
+        message: "Success",
+        description: `Added movie ${movie.title} to watchlist.`,
+      });
+    }
+  };
+
+  const handleRemoveFromWatchlist = (movie) => {
+    setWatchlist((prevWatchlist) => {
+      const newWatchlist = prevWatchlist.filter((item) => item !== movie);
+      localStorage.setItem("watchlist", JSON.stringify(newWatchlist)); // Save updated watchlist to local storage
+      return newWatchlist;
+    });
+
+    notification.success({
+      message: "Success",
+      description: `Removed movie ${movie.title} from watchlist.`,
+    });
+  };
+
+  const isAddedToWatchlist = (movie) => {
+    return watchlist.some((item) => item.id === movie.id);
+  };
+
+  useEffect(() => {
+    const savedWatchlist = localStorage.getItem("watchlist");
+    if (savedWatchlist) {
+      setWatchlist(JSON.parse(savedWatchlist)); // Load watchlist from local storage
+    }
+  }, []);
 
   const renderMovies = () => {
     if (!Array.isArray(movies) || movies.length === 0) {
       return <Empty description="No movies found." />;
     }
 
-    const handleRateMovie = (movieId, rating) => {
-      console.log(`Rating for movie ${movieId}: ${rating}`);
-    };
-
     return (
       <div className={styles.row}>
         {currentMovies.map((movie) => (
-        
-
-          <div>
-              <Link key={movie.id} href={`/Movie/${movie.id}`} passHref>
+          <div key={movie.id}>
             <div className={styles.card}>
-              <Card
-                hoverable
-                style={{ height: "100%" }}
-                cover={<img src={movie.pictureUrl} alt={movie.title} style={{ height: "300px" }} />}
-              >
-                <Meta title={movie.title} description={movie.starring} />
-                
-              </Card>
+              <Link href={`/Movie/${movie.id}`} passHref>
+                <Card
+                  hoverable
+                  style={{ height: "100%" }}
+                  cover={<img src={movie.pictureUrl} alt={movie.title} style={{ height: "220px" }} />}
+                >
+                  <Meta title={movie.title} description={movie.starring} />
+                </Card>
+              </Link>
+              <Rate allowHalf defaultValue={0} onChange={(rating) => handleRateMovie(movie, rating)} />
+              {isAddedToWatchlist(movie) ? (
+                <Button type="text" className={styles.watchlistButton} onClick={() => handleRemoveFromWatchlist(movie)}>
+                  Added to WatchList
+                </Button>
+              ) : (
+                <Button
+                  type="primary"
+                  className={styles.watchlistButton}
+                  onClick={() => handleAddToWatchlist(movie)}
+                  disabled={isAddedToWatchlist(movie)}
+                >
+                  Add to WatchList
+                </Button>
+              )}
             </div>
-          </Link>
-            <Rate allowHalf defaultValue={0} onChange={(rating) => handleRateMovie(movie.id, rating)} />
           </div>
-          
         ))}
       </div>
     );
