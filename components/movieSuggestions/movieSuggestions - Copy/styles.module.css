@@ -1,6 +1,3 @@
-.movieSuggestions {
-  margin-top: 40px;
-}
 
 .movieGrid {
   display: grid;
@@ -15,19 +12,17 @@
 
 .movieCardCover {
   object-fit: cover;
-  height: 200px;
+  height: 100px;
 }
 
-.movieCardContent {
+/* .movieCardContent {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
-.movieCardTitle {
-  margin-bottom: 0;
-}
+
 
 .movieCardContent p {
   margin-bottom: 8px;

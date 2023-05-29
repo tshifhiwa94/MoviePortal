@@ -67,7 +67,7 @@ const AuthPage = () => {
           </Form>
           <p className={styles.switchText}>
             Already have an account?{' '}
-            <Link href="">
+            <Link href="/">
                 <Button type="link" onClick={handleFormSwitch}>
                 Login here
                 </Button>

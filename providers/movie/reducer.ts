@@ -8,6 +8,8 @@ export function UserReducer(incomingState: IMovieStateContext, action: Action<IM
   switch (type) {
     case movieActionEnum.fetchMoviesRequest:
       return { ...incomingState, ...payload };
+    case movieActionEnum.mostRatedMovies:
+      return { ...incomingState, ...payload };
     default:
       return incomingState;
   }

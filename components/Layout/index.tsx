@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from './Layout.module.css';
 import { useMovie } from '../../providers/movie';
 import MovieList from '../Movie/MovieList/MovieList';
-import { PoweroffOutlined, ClockCircleOutlined, LogoutOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useUser } from '../../providers/user';
 
 
@@ -25,6 +25,8 @@ const Layout = ({ children }) => {
     }
   }, []);
 
+
+
   const breadcrumbNameMap = {
     '/': 'Home',
     '/Movie': 'Movies',
@@ -43,8 +45,8 @@ const Layout = ({ children }) => {
   });
 
   const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
-      <Link href="/">Home</Link>
+    <Breadcrumb.Item key="home" >
+      <Link href="/HomePage">Home</Link>
     </Breadcrumb.Item>,
   ].concat(extraBreadcrumbItems);
 
@@ -78,18 +80,18 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.layoutContainer}>
       <div className={styles.demoNav}>
-      <Button className={router.pathname === '/HomePage' ? styles.activeButton : ''}>
+      <a className={router.pathname === '/HomePage' ? styles.activeButton : ''}>
         <Link href="/HomePage">ZMovies</Link>
-      </Button>
-      <Button className={router.pathname === '/Movie' ? styles.activeButton : ''}>
+      </a>
+      <a className={router.pathname === '/Movie' ? styles.activeButton : ''}>
         <Link href="/Movie">All Movies</Link>
-      </Button>
-      <Button className={router.pathname === '/MostRatedMovies' ? styles.activeButton : ''}>
+      </a>
+      <a className={router.pathname === '/MostRatedMovies' ? styles.activeButton : ''}>
         <Link href="/MostRatedMovies">Most Rated Movies</Link>
-      </Button>
-      <Button className={router.pathname === '/WatchList' ? styles.activeButton : ''}>
+      </a>
+      <a className={router.pathname === '/WatchList' ? styles.activeButton : ''}>
         <Link href="/WatchList">Watch List</Link>
-      </Button>
+      </a>
 
         <Input.Search
           className={styles.globalSearch}

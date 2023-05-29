@@ -1,9 +1,11 @@
 // import { GetStaticProps, GetStaticPaths } from 'next'
 
 // import { User } from '../../interfaces'
-// import { sampleUserData } from '../../utils/sample-data'
+
 // import Layout from '../../components/Layout'
-// import ListDetail from '../../components/ListDetail'
+
+// import { useMovie } from '../../providers/movie'
+// import MovieList from '../../components/Movie/MovieList/MovieList'
 
 // type Props = {
 //   item?: User
@@ -11,9 +13,12 @@
 // }
 
 // const StaticPropsDetail = ({ item, errors }: Props) => {
+
+//     const {FetchedMovies}=useMovie()
+
 //   if (errors) {
 //     return (
-//       <Layout title="Error | Next.js + TypeScript Example">
+//       <Layout >
 //         <p>
 //           <span style={{ color: 'red' }}>Error:</span> {errors}
 //         </p>
@@ -22,12 +27,8 @@
 //   }
 
 //   return (
-//     <Layout
-//       title={`${
-//         item ? item.name : 'User Detail'
-//       } | Next.js + TypeScript Example`}
-//     >
-//       {item && <ListDetail item={item} />}
+//     <Layout>
+//       {item && <MovieList movies={item} />}
 //     </Layout>
 //   )
 // }
@@ -35,8 +36,9 @@
 // export default StaticPropsDetail
 
 // export const getStaticPaths: GetStaticPaths = async () => {
+//     const {FetchedMovies}=useMovie()
   
-//   const paths = sampleUserData.map((user) => ({
+//   const paths = FetchedMovies.map((user) => ({
 //     params: { id: user.id.toString() },
 //   }))
 
@@ -44,9 +46,10 @@
 // }
 
 // export const getStaticProps: GetStaticProps = async ({ params }) => {
+//     const {FetchedMovies}=useMovie()
 //   try {
 //     const id = params?.id
-//     const item = sampleUserData.find((data) => data.id === Number(id))
+//     const item = FetchedMovies.find((data) => data.id === id)
 
 //     return { props: { item } }
 //   } catch (err: any) {

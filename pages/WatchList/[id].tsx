@@ -17,13 +17,19 @@ const MoviePage: FC = () => {
   const selectedMovie = watchlist.find((movie: IMovie) => movie.id === id);
 
   var foundMovie: IMovie;
-  var foundCategory: IMovie[];
+  var foundMovies: IMovie[];
 
   if (watchlist) {
     foundMovie = watchlist.find((movie: IMovie) => movie.id.toString() === id);
-    foundCategory = watchlist.filter(
+    foundMovies= watchlist.filter(
       (movie: IMovie) =>
-        movie?.starring.toLowerCase() === foundMovie?.starring.toLowerCase() &&
+        movie?.categoryName.toLowerCase() === foundMovie?.categoryName.toLowerCase() &&
+        movie?.id.toString() !== id
+    );
+  }else{
+    foundMovies= watchlist.filter(
+      (movie: IMovie) =>
+        movie?.rateCount >= foundMovie?.rateCount &&
         movie?.id.toString() !== id
     );
   }
@@ -41,7 +47,7 @@ const MoviePage: FC = () => {
       <div className={styles.videoContainer}>
         {selectedMovie && <VideoPlayer videoUrl={selectedMovie.videoUrl} />}
       </div>
-      <Carousel effect="scrollx" autoplay><MovieSuggestions movies={foundCategory} /></Carousel >
+      <Carousel effect="scrollx" autoplay><MovieSuggestions movies={foundMovies} /></Carousel >
       
     </div>
   );

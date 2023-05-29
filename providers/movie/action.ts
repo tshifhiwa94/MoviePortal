@@ -8,7 +8,7 @@ export enum movieActionEnum {
 }
 
 export const fetchMoviesRequestAction = createAction<IMovieStateContext, IMovie[]>(movieActionEnum.fetchMoviesRequest,(FetchedMovies) => ({ FetchedMovies }));
-export const mostMovieRequestAction = createAction<IMovieStateContext, IMovie[]>(movieActionEnum.mostRatedMovies,(FetchedMovies) => ({ FetchedMovies}));
+export const mostRatedMovieRequestAction = createAction<IMovieStateContext, IMovie[]>(movieActionEnum.mostRatedMovies,(MostRatedMovies) => ({ MostRatedMovies}));
 
 
 

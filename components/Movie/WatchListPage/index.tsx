@@ -9,7 +9,7 @@ const WatchList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [watchlist, setWatchlist] = useState([]);
 
-  const moviesPerPage = 4;
+  const moviesPerPage = 8;
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
   const currentMovies = watchlist.slice(indexOfFirstMovie, indexOfLastMovie);
@@ -25,7 +25,7 @@ const WatchList = () => {
         description: "Removed movie from watchlist.",
         
       });
-      currentMovies.length-=1
+      
   };
   
 

@@ -2,46 +2,68 @@
 .layoutContainer {
   padding: 20px;
   /* background-color: #b9b3afb7; */
-  background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg");
+  /* background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg"); */
   background-size:cover;
   display: flex;
   flex-direction: column;
   min-height: 94vh;
+  background-color: #001e3c;
 
 }
+
+
 
 .demoNav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  background-color: #0b335b;
 }
 
 .demoNav a {
   margin-right: 10px;
+  color:azure;
 }
-
+:where(.css-dev-only-do-not-override-15rg2km).ant-breadcrumb a {
+  color: rgba(177, 164, 164, 0.711);
+  transition: color 0.2s;
+  padding: 0 4px;
+  border-radius: 4px;
+  height: 22px;
+  display: inline-block;
+  margin-inline: -4px;
+}
 .globalSearch {
   width: 300px;
 }
 
+:where(.css-dev-only-do-not-override-15rg2km).ant-breadcrumb a {
+  color: rgb(231 234 243);
+  transition: color 0.2s;
+  padding: 0 4px;
+  border-radius: 4px;
+  height: 22px;
+  display: inline-block;
+  margin-inline: -4px;
+}
 .content {
   flex: 1;
   padding: 24px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-  background-color: #8f7f7f79;
+  background-color:#043d757a;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .activeButton {
-  background-color: #f0f0f0; /* Change to the desired color for the active button */
+  background-color: #b7afa861; /* Change to the desired color for the active button */
   color: #1890ff; /* Change to the desired text color for the active button */
 }
 .breadcrumbWrapper {
   margin-bottom: 16px;
-  color: black;
+  color: rgb(168, 160, 160);
 }
 
 .logoutBtn {

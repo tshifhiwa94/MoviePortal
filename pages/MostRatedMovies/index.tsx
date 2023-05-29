@@ -4,13 +4,10 @@ import Layout from '../../components/Layout';
 import { useMovie } from '../../providers/movie';
 
 const IndexPage = () => {
-  // Simulated movie data
- 
-  const {FetchedMovies}=useMovie()
 
   return (
     <Layout>
-      <MostRatedMovies movies={FetchedMovies} />
+      <MostRatedMovies />
     </Layout>
   );
 };

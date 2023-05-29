@@ -1,11 +1,14 @@
 .row {
   display: flex;
   justify-content: center;
+  
 }
 
 .card {
   margin: 16px;
-  width: 200px; 
+  width: 250px; 
+  
+ 
   
 }
 
@@ -18,3 +21,17 @@
     height: 240px;
   }
 }
+.addedWatchlistButton
+{
+  background-color:rgb(166, 166, 195);
+  color:white;
+}
+
+
+
+
+
+
+/* span{
+  color:azure;
+} */

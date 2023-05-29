@@ -1,6 +1,6 @@
 import React, { useReducer, useContext ,useEffect} from "react";
 import {MoviesStateContext,MoviesActionContext, INITIAL_STATE} from "./context";
-import { fetchMoviesRequestAction} from "./action";
+import { fetchMoviesRequestAction, mostRatedMovieRequestAction} from "./action";
 import { UserReducer } from "./reducer";
 import { useGet } from "restful-react";
 
@@ -8,24 +8,52 @@ export const MovieProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
 
 
-  const { data: movieData } = useGet({
-    path: "services/app/Movie/GetAll",
+
+  const { data: movieData, loading: movieLoading } = useGet({
+    path: 'services/app/Movie/GetAll',
   });
-  if (!movieData) {
-    return <div>Loading...</div>;
-    
-  }
- 
-console.log(movieData.result);
+
+  const { data: mostmovieData, loading: mostmovieLoading } = useGet({
+    path: 'services/app/Movie/GetTopRatedMovies',
+  });
+
+
+
 
   const fetchMovies = () => {
-
-    dispatch(fetchMoviesRequestAction(movieData.result));
+    if (movieData) {
+      dispatch(fetchMoviesRequestAction(movieData.result));
+    }
   };
 
-  const  mostRatedMovies = (payload:string)=>{
+  const mostRatedMovies = () => {
+    if (mostmovieData) {
+      // Dispatch action with mostmovieData.result
+      // Replace `yourAction` with your actual action
+      dispatch(mostRatedMovieRequestAction(mostmovieData.result));
+    }
+  };
 
+
+  useEffect(() => {
+    fetchMovies();
+  }, [movieData, dispatch]);
+
+  useEffect(() => {
+    mostRatedMovies();
+  }, [mostmovieData, dispatch]);
+
+  if (movieLoading || mostmovieLoading) {
+    return <div>Loading...</div>;
   }
+
+
+
+ 
+
+
+
+
 
 
 

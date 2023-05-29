@@ -4,28 +4,35 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg");
+  /* background-image: url("./../../public/wp1916278-the-martian-wallpapers.jpg"); */
+  background-color: #042b51e6;
+  color: azure;
 }
 
 
-.title {
+.title{
   font-size: 34px;
   font-weight: bold;
   margin-bottom: 24px;
   text-align: center;
+  color:azure;
 }
 
 .form {
+  background-color: #001e3c;
   width: 400px;
   border-radius: 2%;
-background-color: rgba(87, 89, 90, 0.726);
+  
   border: 1px solid rgb(168, 162, 162);
+  
 }
 
 .siteFormItemIcon {
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.444);
 }
-
+.titleRegister{
+  color:azure;
+}
 .submitButton {
   width: 100%;
  

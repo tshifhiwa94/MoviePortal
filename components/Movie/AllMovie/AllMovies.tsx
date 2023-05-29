@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Spin } from "antd";
+import { Empty, Spin } from "antd";
 import { useMovie } from "../../../providers/movie";
 import MovieList from "../MovieList/MovieList";
+import { IMovie } from "../../../interfaces";
 
 const AllMovies = () => {
   const { FetchedMovies, fetchMovies } = useMovie();
@@ -12,11 +13,11 @@ const AllMovies = () => {
     fetchMovies(); // Fetch movies when the component mounts
   }, []);
 
-  const filterMovies = (movies) => {
+  const filterMovies = (movies:IMovie[]) => {
     if (searchText === "") {
+     
       return movies;
     }
-
     return movies.filter((movie) =>
       movie.title.toLowerCase().includes(searchText.toLowerCase())
     );

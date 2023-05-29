@@ -15,17 +15,30 @@ const MoviePage: FC = () => {
   const selectedMovie = FetchedMovies.find((movie) => movie.id === movieId);
 
 
-
   var foundMovie: IMovie;
-  var foundCategory: IMovie[];
+  var foundMovies: IMovie[];
 
   if (FetchedMovies) {
-    foundMovie = FetchedMovies.find((movie) => movie.id.toString() === movieId);
-    foundCategory = FetchedMovies.filter(
-      (movie) =>
+    foundMovie = FetchedMovies.find((movie: IMovie) => movie.id.toString() === movieId);
+    foundMovies= FetchedMovies.filter(
+      (movie: IMovie) =>
         movie?.categoryName.toLowerCase() === foundMovie?.categoryName.toLowerCase() &&
         movie?.id.toString() !== movieId
     );
+  }else{
+    foundMovies= FetchedMovies.filter(
+      (movie: IMovie) =>
+        movie?.rateCount >= foundMovie?.rateCount &&
+        movie?.id.toString() !==movieId
+    );
+  }
+  // if (FetchedMovies) {
+  //   foundMovie = FetchedMovies.find((movie) => movie.id.toString() === movieId);
+  //   foundCategory = FetchedMovies.filter(
+  //     (movie) =>
+  //       movie?.categoryName.toLowerCase() === foundMovie?.categoryName.toLowerCase() &&
+  //       movie?.id.toString() !== movieId
+  //   );
 
   return (
     <div className={styles.container}>
@@ -41,11 +54,10 @@ const MoviePage: FC = () => {
         {selectedMovie && <VideoPlayer videoUrl={selectedMovie.videoUrl} />}
       </div>
       <div className={styles.suggestionsContainer}>
-        <MovieSuggestions movies={foundCategory} />
+        <MovieSuggestions movies={foundMovies} />
       </div>
     </div>
 
   );
 };
-}
 export default MoviePage;

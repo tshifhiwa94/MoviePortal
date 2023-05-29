@@ -1,12 +1,14 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin: -16px;
+    margin: 16px;
+    margin-left: 60px;
   }
   
   .card {
-    width: 300px;
+    width: 250px;
     margin: 16px;
+    
   }
   
   .watchlist-title h1 {

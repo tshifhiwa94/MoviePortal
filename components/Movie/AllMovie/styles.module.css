@@ -32,12 +32,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: 60vh; 
+  width: 100%;
+  height: 50vh; 
 }
 
 .reactPlayer {
   width: 80%;
   height: 100%;
+}
+.MovieList_row__RLN9n {
+  display: flex;
+  justify-content: center;
+  height:60vh;
+  color:azure
+
 }
   

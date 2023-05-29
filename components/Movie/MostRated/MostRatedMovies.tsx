@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Empty } from 'antd';
 import styles from './MostRatedMovies.module.css';
+import { useMovie } from '../../../providers/movie';
+import { Rate } from 'antd';
 
-const MostRatedMovies = ({ movies }) => {
-  const [mostRatedMovies, setMostRatedMovies] = useState([]);
+const MostRatedMovies = () => {
+  const { MostRatedMovies } = useMovie();
 
-  useEffect(() => {
-    // Function to calculate most rated movies
-    const calculateMostRatedMovies = () => {
-      const sortedMovies = movies.sort((a, b) => b.rating - a.rating);
-
-      // Get the top 10 most rated movies
-      const topRatedMovies = sortedMovies.slice(0, 10);
-
-      const moviesWithRatingSum = topRatedMovies.map((movie) => ({
-        ...movie,
-        ratingSum: movie.rating.reduce((acc, cur) => acc + cur.ratingValue, 0),
-      }));
-
-      setMostRatedMovies(moviesWithRatingSum);
-    };
-
-    calculateMostRatedMovies();
-  }, [movies]);
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Most Rated Movies</h1>
-      {mostRatedMovies.length > 0 ? (
-        <ul className={styles.list}>
-          {mostRatedMovies.map((movie) => (
-            <li key={movie.id} className={styles.movie}>
+      {MostRatedMovies && MostRatedMovies.length > 0 ? (
+        <ul className={styles.movieList}>
+          {MostRatedMovies.map((movie) => (
+            <li key={movie.id} className={styles.movieItem}>
               <img src={movie.pictureUrl} alt={movie.title} className={styles.movieImage} />
               <div className={styles.movieInfo}>
                 <span className={styles.movieTitle}>{movie.title}</span>
                 <span className={styles.movieRating}>
-                  Rating: {movie.rating} | Rating Sum: {movie.ratingSum}
+                  Rating Count: {<Rate disabled defaultValue={movie.rateCount} />}
                 </span>
               </div>
             </li>
@@ -49,3 +33,19 @@ const MostRatedMovies = ({ movies }) => {
 };
 
 export default MostRatedMovies;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
